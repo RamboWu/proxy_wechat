@@ -1,6 +1,6 @@
-# proxy_wx
+# proxy_wechat
 
-> a self modification for wechat
+> proxy_wechat
 
 #### Build Setup
 
