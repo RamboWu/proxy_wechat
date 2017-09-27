@@ -13,6 +13,7 @@ module.exports = {
     __static: true
   },
   plugins: [
+    'vuefix',
     'html'
   ],
   'rules': {
@@ -25,6 +26,7 @@ module.exports = {
     'no-multi-assign': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    "indent": ["error", 4],
     "linebreak-style": 0
   }
 }

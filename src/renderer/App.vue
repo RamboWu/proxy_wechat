@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
+export default {
     name: 'proxy_wechat',
-  };
+};
 </script>
 
 <style lang="less" scoped>
