@@ -32,15 +32,16 @@ export default {
 <template>
 <div class="message" v-scroll-bottom="session.messages">
     <ul v-if="session">
-        <!--li v-for="item in session.messages">
+        <li v-for="item in session.messages">
             <p class="time">
                 <span>{{ item.date | time }}</span>
             </p>
             <div class="main" :class="{ self: item.self }">
-                <img class="avatar" width="30" height="30" :src="item.self ? user.img : session.user.img" />
+                <!--:src="item.self ? user.img : session.user.img" -->
+                <img class="avatar" width="30" height="30" src="~@/assets/logo.png"  />
                 <div class="text">{{ item.content }}</div>
             </div>
-        </li-->
+        </li>
     </ul>
 </div>
 </template>

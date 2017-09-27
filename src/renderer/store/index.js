@@ -15,7 +15,7 @@ Vue.use(Vuex);
 const now = new Date();
 const store = new Vuex.Store({
     // modules,
-    // strict: process.env.NODE_ENV !== 'production',
+    strict: process.env.NODE_ENV !== 'production',
     state: {
     // 当前用户
         user: {
