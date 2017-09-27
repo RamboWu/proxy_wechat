@@ -32,7 +32,7 @@ export default {
 <template>
 <div class="message" v-scroll-bottom="session.messages">
     <ul v-if="session">
-        <li v-for="item in session.messages">
+        <li v-for="item in session.messages" :key="item.id" >
             <p class="time">
                 <span>{{ item.date | time }}</span>
             </p>

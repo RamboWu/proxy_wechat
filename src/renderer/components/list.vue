@@ -23,7 +23,8 @@ export default {
 <template>
 <div class="list">
     <ul>
-        <li v-for="item in sessions" :class="{ active: item.id === currentId }" @click="selectSession(item.id)">
+        <!--TODO 下面的这个是 吴培峰加的，暂时不知道是啥意思 :key="item.id" -->
+        <li v-for="item in sessions" :key="item.id" :class="{ active: item.id === currentId }" @click="selectSession(item.id)">
             <!-- :src="item.user.img" -->
             <img class="avatar"  width="30" height="30" :alt="item.user.name" src="~@/assets/logo.png" >
             <p class="name">{{item.user.name}}</p>
