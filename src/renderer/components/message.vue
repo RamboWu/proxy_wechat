@@ -1,11 +1,13 @@
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-    vuex: {
-        getters: {
-            user: ({ user }) => user,
-            session: ({ sessions, currentSessionId }) =>
-                sessions.find(session => session.id === currentSessionId),
-        },
+    computed: {
+        ...mapGetters([
+            'user',
+            'session',
+            // ...
+        ]),
     },
     filters: {
         // 将日期过滤为 hour:minutes

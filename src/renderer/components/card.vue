@@ -1,12 +1,13 @@
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-    vuex: {
-        getters: {
-            user: ({ user }) => user,
-            filterKey: ({ filterKey }) => filterKey,
-        },
+    computed: {
+        ...mapGetters([
+            'user',
+            'filterKey',
+            // ...
+        ]),
     },
     methods: {
         ...mapActions([

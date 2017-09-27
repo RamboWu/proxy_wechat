@@ -91,6 +91,19 @@ const store = new Vuex.Store({
             commit('SET_FILTER_KEY', value);
         },
     },
+    getters: {
+        user: ({ user }) => user,
+        filterKey: ({ filterKey }) => filterKey,
+        // 过滤后的会话列表
+        sessions: ({ sessions, filterKey }) => {
+            const result = sessions.filter(session => session.user.name.includes(filterKey));
+            return result;
+        },
+        // 当前会话index
+        currentId: ({ currentSessionId }) => currentSessionId,
+        session: ({ sessions, currentSessionId }) =>
+            sessions.find(session => session.id === currentSessionId),
+    },
 });
 
 store.watch(
