@@ -1,4 +1,5 @@
 <script>
+import Vue from 'vue';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -19,11 +20,12 @@ export default {
         },
     },
     directives: {
-        // 发送消息后滚动到底部
-        'scroll-bottom': function scrollBottom() {
-            /* this.vm.$nextTick(() => {
-                this.el.scrollTop = this.el.scrollHeight - this.el.clientHeight;
-            }); */
+        'scroll-bottom': {
+            update(el) {
+                Vue.nextTick(() => {
+                    el.scrollTop = el.scrollHeight - el.clientHeight;
+                });
+            },
         },
     },
 };
@@ -32,6 +34,7 @@ export default {
 <template>
 <div class="message" v-scroll-bottom="session.messages">
     <ul v-if="session">
+        <!-- :key="item.id" 这是吴培峰加的 暂时不知道啥意思 -->
         <li v-for="item in session.messages" :key="item.id" >
             <p class="time">
                 <span>{{ item.date | time }}</span>
