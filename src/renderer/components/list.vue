@@ -23,10 +23,11 @@ export default {
 <template>
 <div class="list">
     <ul>
-        <!--li v-for="item in sessions" :class="{ active: item.id === currentId }" @click="selectSession(item.id)">
-            <img class="avatar"  width="30" height="30" :alt="item.user.name" :src="item.user.img">
+        <li v-for="item in sessions" :class="{ active: item.id === currentId }" @click="selectSession(item.id)">
+            <!-- :src="item.user.img" -->
+            <img class="avatar"  width="30" height="30" :alt="item.user.name" src="~@/assets/logo.png" >
             <p class="name">{{item.user.name}}</p>
-        </li-->
+        </li>
     </ul>
 </div>
 </template>
