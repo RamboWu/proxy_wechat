@@ -1,6 +1,25 @@
 <script>
+import { mapActions } from 'vuex';
+
+import Card from './components/card';
+import List from './components/list';
+import TextChat from './components/textchat';
+import Message from './components/message';
+
 export default {
     name: 'proxy_wechat',
+    components: { Card, List, TextChat, Message },
+    methods: {
+        ...mapActions([
+            'initData',
+            'sendMessage',
+            'selectSession',
+            'search',
+        ]),
+    },
+    created() {
+        this.initData();
+    },
 };
 </script>
 
@@ -10,8 +29,8 @@ export default {
     <!--div class="sidebar">
         <card></card>
         <list></list>
-    </div>
-    <div class="main">
+    </div-->
+    <!--div class="main">
         <message></message>
         <textchat></textchat>
     </div-->

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import modules from './modules';
+// import modules from './modules';
 
 Vue.use(Vuex);
 
@@ -12,8 +12,8 @@ Vue.use(Vuex);
 
 const now = new Date();
 const store = new Vuex.Store({
-    modules,
-    strict: process.env.NODE_ENV !== 'production',
+    // modules,
+    // strict: process.env.NODE_ENV !== 'production',
     state: {
     // 当前用户
         user: {
@@ -77,6 +77,20 @@ const store = new Vuex.Store({
             state.filterKey = value;
         },
     },
+    actions: {
+        initData({ commit }) {
+            commit('INIT_DATA');
+        },
+        sendMessage({ commit }, content) {
+            commit('SEND_MESSAGE', content);
+        },
+        selectSession({ commit }, id) {
+            commit('SELECT_SESSION', id);
+        },
+        search({ commit }, value) {
+            commit('SET_FILTER_KEY', value);
+        },
+    },
 });
 
 store.watch(
@@ -91,10 +105,3 @@ store.watch(
 );
 
 export default store;
-export const actions = {
-    initData: ({ dispatch }) => dispatch('INIT_DATA'),
-    sendMessage: ({ dispatch }, content) => dispatch('SEND_MESSAGE', content),
-    selectSession: ({ dispatch }, id) => dispatch('SELECT_SESSION', id),
-    search: ({ dispatch }, value) => dispatch('SET_FILTER_KEY', value),
-};
-

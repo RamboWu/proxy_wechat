@@ -1,15 +1,20 @@
 <script>
-import { actions } from '../store';
+import { mapActions } from 'vuex';
 
 export default {
     vuex: {
-        actions,
         getters: {
             user: ({ user }) => user,
             filterKey: ({ filterKey }) => filterKey,
         },
     },
     methods: {
+        ...mapActions([
+            'initData',
+            'sendMessage',
+            'selectSession',
+            'search',
+        ]),
         onKeyup(e) {
             this.search(e.target.value);
         },

@@ -1,9 +1,8 @@
 <script>
-import { actions } from '../store';
+import { mapActions } from 'vuex';
 
 export default {
     vuex: {
-        actions,
         getters: {
             // 过滤后的会话列表
             sessions: ({ sessions, filterKey }) => {
@@ -13,6 +12,14 @@ export default {
             // 当前会话index
             currentId: ({ currentSessionId }) => currentSessionId,
         },
+    },
+    methods: {
+        ...mapActions([
+            'initData',
+            'sendMessage',
+            'selectSession',
+            'search',
+        ]),
     },
 };
 </script>

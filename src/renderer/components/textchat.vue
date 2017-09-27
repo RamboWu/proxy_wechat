@@ -1,19 +1,22 @@
 <script>
-import { actions } from '../store';
+import { mapActions } from 'vuex';
 
 export default {
-    vuex: {
-        actions,
-    },
     data() {
         return {
             content: '',
         };
     },
     methods: {
+        ...mapActions([
+            'initData',
+            'sendMessage',
+            'selectSession',
+            'search',
+        ]),
         onKeyup(e) {
             if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
-                this.sendMessage(this.content);
+                this.$store.dispathsendMessage(this.content);
                 this.content = '';
             }
         },
