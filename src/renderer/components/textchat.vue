@@ -16,7 +16,7 @@ export default {
         ]),
         onKeyup(e) {
             if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
-                this.$store.dispathsendMessage(this.content);
+                this.sendMessage(this.content);
                 this.content = '';
             }
         },
