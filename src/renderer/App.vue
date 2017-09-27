@@ -26,14 +26,14 @@ export default {
 <template>
 <div id="app">
     <!--router-view></router-view-->
-    <!--div class="sidebar">
+    <div class="sidebar">
         <card></card>
         <list></list>
-    </div-->
-    <!--div class="main">
+    </div>
+    <div class="main">
         <message></message>
-        <textchat></textchat>
-    </div-->
+        <text-chat></text-chat>
+    </div>
 </div>
 </template>
 

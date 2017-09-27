@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import path from 'path';
+
 // import modules from './modules';
 
 Vue.use(Vuex);
@@ -18,7 +20,7 @@ const store = new Vuex.Store({
     // 当前用户
         user: {
             name: 'coffce',
-            img: 'dist/images/1.jpg',
+            img: path.join(__static, '/1.jpg'),
         },
         // 会话列表
         sessions: [

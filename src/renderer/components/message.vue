@@ -21,9 +21,9 @@ export default {
     directives: {
         // 发送消息后滚动到底部
         'scroll-bottom': function scrollBottom() {
-            this.vm.$nextTick(() => {
+            /* this.vm.$nextTick(() => {
                 this.el.scrollTop = this.el.scrollHeight - this.el.clientHeight;
-            });
+            }); */
         },
     },
 };
