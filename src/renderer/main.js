@@ -2,7 +2,8 @@ import Vue from 'vue';
 import axios from 'axios';
 
 import App from './App';
-import router from './router';
+// 暂时去掉没用的rounter
+// import router from './router';
 import store from './store';
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
@@ -12,7 +13,7 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
     components: { App },
-    router,
+    // router,
     store,
     template: '<App/>',
 }).$mount('#app');

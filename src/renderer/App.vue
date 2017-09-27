@@ -1,14 +1,22 @@
-<template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
-</template>
-
 <script>
 export default {
     name: 'proxy_wechat',
 };
 </script>
+
+<template>
+<div id="app">
+    <!--router-view></router-view-->
+    <!--div class="sidebar">
+        <card></card>
+        <list></list>
+    </div>
+    <div class="main">
+        <message></message>
+        <textchat></textchat>
+    </div-->
+</div>
+</template>
 
 <style lang="less" scoped>
 #app {
