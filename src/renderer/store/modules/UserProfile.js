@@ -3,7 +3,7 @@
 */
 
 const state = {
-    user: [
+    users: [
         {
             wechat_id: 123,
             wechat_name: '微信名',
