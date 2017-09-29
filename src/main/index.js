@@ -1,5 +1,5 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
-
+import { app, ipcMain, BrowserWindow } from 'electron' // eslint-disable-line
+import Weixinbot from '../wechat/weixinbot';
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -43,3 +43,25 @@ app.on('activate', () => {
         createWindow();
     }
 });
+
+// will send qrcode to your email address
+const bot = new Weixinbot();
+
+// will emit when bot fetch a new qrcodeUrl
+bot.on('qrcode', (qrcodeUrl) => {
+    console.log(qrcodeUrl);
+});
+
+bot.on('friend', (msg) => {
+    console.log(`${msg.Member.NickName}: ${msg.Content}`);
+    bot.sendText(msg.FromUserName, 'Got it');
+});
+
+
+function initIPC() {
+    ipcMain.on('request_login', (event) => {
+        bot.run();
+    });
+}
+
+initIPC();
