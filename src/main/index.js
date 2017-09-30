@@ -57,11 +57,10 @@ function initIPC() {
 
         bot.on('qrcode_scaned', () => {
             event.sender.send('weixinbot:qrcode_scaned');
-            console.log('二维码已经扫描');
         });
 
         bot.on('login_confirmed', () => {
-            console.log('用户已经点击登录');
+            event.sender.send('weixinbot:login_confirmed');
         });
 
         bot.on('friend', (msg) => {
