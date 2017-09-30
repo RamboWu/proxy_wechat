@@ -48,7 +48,7 @@ let bot = null;
 
 function initIPC() {
     ipcMain.on('qrcode_auth_opened', (event) => {
-        /* bot = new Weixinbot();
+        bot = new Weixinbot();
         // 二维码信息获取到了
         bot.on('qrcode', (qrcodeUrl) => {
             event.sender.send('weixinbot:qrcode', qrcodeUrl);
@@ -71,7 +71,7 @@ function initIPC() {
         bot.on('logged_out', () => {
             console.log('用户已经登出');
         });
-        bot.run(); */
+        bot.run();
     });
 
     ipcMain.on('qrcode_auth_closed', (event) => {

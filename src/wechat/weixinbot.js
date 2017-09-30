@@ -26,9 +26,9 @@ let URLS = getUrls({});
 const logo = fs.readFileSync(path.join(__dirname, '..', 'logo.txt'), 'utf8');
 
 // try persistent cookie
-const cookiePath = path.join(process.cwd(), '.cookie.json');
-touch.sync(cookiePath);
-const jar = new tough.CookieJar(new FileCookieStore(cookiePath));
+// const cookiePath = path.join(process.cwd(), '.cookie.json');
+// touch.sync(cookiePath);
+// const jar = new tough.CookieJar(new FileCookieStore(cookiePath));
 
 const req = axios.create({
     timeout: 35e3,
@@ -38,7 +38,7 @@ const req = axios.create({
       'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2652.0 Safari/537.36',
         'Referer': 'https://wx2.qq.com/',
     },
-    jar,
+    // jar,
     withCredentials: true,
     xsrfCookieName: null,
     xsrfHeaderName: null,
