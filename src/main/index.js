@@ -56,6 +56,7 @@ function initIPC() {
         });
 
         bot.on('qrcode_scaned', () => {
+            event.sender.send('weixinbot:qrcode_scaned');
             console.log('二维码已经扫描');
         });
 
