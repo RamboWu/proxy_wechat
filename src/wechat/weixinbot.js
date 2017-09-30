@@ -28,7 +28,7 @@ const logo = fs.readFileSync(path.join(__dirname, '..', 'logo.txt'), 'utf8');
 // try persistent cookie
 const cookiePath = path.join(process.cwd(), '.cookie.json');
 touch.sync(cookiePath);
-const jar = new tough.CookieJar(new FileCookieStore(cookiePath));
+const jar = new tough.CookieJar(/* new FileCookieStore(cookiePath) */);
 
 const req = axios.create({
     timeout: 35e3,
