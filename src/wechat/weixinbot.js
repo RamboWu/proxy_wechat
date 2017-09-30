@@ -74,17 +74,19 @@ export default class WeixinBot extends EventEmitter {
     }
 
     async run() {
-        if (fs.existsSync(secretPath)) {
+        this.init();
+        /* if (fs.existsSync(secretPath)) {
             this.initConfig();
             const secret = JSON.parse(fs.readFileSync(secretPath, 'utf8'));
             Object.assign(this, secret);
             this.runLoop();
         } else {
             this.init();
-        }
+        } */
     }
 
     initConfig() {
+        this.logged_in = false;
         this.baseHost = '';
         this.pushHost = '';
         this.uuid = '';
@@ -119,6 +121,7 @@ export default class WeixinBot extends EventEmitter {
     }
 
     async init() {
+        this.logged_in = false;
         debug('开始登录...');
 
         this.initConfig();
@@ -139,9 +142,10 @@ export default class WeixinBot extends EventEmitter {
         debug(`获得 uuid -> ${this.uuid}`);
 
         const qrcodeUrl = URLS.QRCODE_PATH + this.uuid;
-        this.emit('qrcode', qrcodeUrl);
+        this.emit('qrcode', qrcodeUrl.replace('/qrcode/', '/l/'));
 
-        if (this.receiver) {
+        // 不要这一段代码了，发送邮箱没什么意义
+        /* if (this.receiver) {
             debug(`发送二维码图片到邮箱 ${this.receiver}`);
             this.transporter.sendMail({
                 from: `WeixinBot <${this.transporter.transporter.options.auth.user}>`,
@@ -153,15 +157,25 @@ export default class WeixinBot extends EventEmitter {
             });
         } else {
             qrcode.generate(qrcodeUrl.replace('/qrcode/', '/l/'));
-        }
+        } */
 
         // limit check times
         this.checkTimes = 0;
         while (true) {
             const loginCode = await this.checkLoginStep();
-            if (loginCode === 200) break;
+            if (loginCode === 201) {
+                this.emit('qrcode_scaned');
+            }
 
-            if (loginCode !== 201) this.checkTimes += 1;
+            if (loginCode === 200) {
+                this.logged_in = true;
+                this.emit('login_confirmed');
+                break;
+            }
+
+            if (loginCode !== 201) {
+                this.checkTimes += 1;
+            }
 
             if (this.checkTimes > 6) {
                 debug('检查登录状态次数超出限制，重新获取二维码');
@@ -342,14 +356,14 @@ export default class WeixinBot extends EventEmitter {
             DeviceID: this.deviceid,
         };
 
-        fs.writeFileSync(secretPath, JSON.stringify({
+        /* fs.writeFileSync(secretPath, JSON.stringify({
             skey: this.skey,
             sid: this.sid,
             uin: this.uin,
             passTicket: this.passTicket,
             baseHost: this.baseHost,
             baseRequest: this.baseRequest,
-        }), 'utf8');
+        }), 'utf8'); */
     }
 
     async webwxinit() {
@@ -473,8 +487,8 @@ export default class WeixinBot extends EventEmitter {
         const selector = data.match(/selector:"(\d+)"/)[1];
 
         if (retcode !== '0') {
+            this.emit('logged_out');
             debug('你在其他地方登录或登出了微信，正在尝试重新登录...');
-            this.runLoop();
             return;
         }
 

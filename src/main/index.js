@@ -44,23 +44,38 @@ app.on('activate', () => {
     }
 });
 
-// will send qrcode to your email address
-const bot = new Weixinbot();
-
-// will emit when bot fetch a new qrcodeUrl
-bot.on('qrcode', (qrcodeUrl) => {
-    console.log(qrcodeUrl);
-});
-
-bot.on('friend', (msg) => {
-    console.log(`${msg.Member.NickName}: ${msg.Content}`);
-    bot.sendText(msg.FromUserName, 'Got it');
-});
-
+let bot = null;
 
 function initIPC() {
-    ipcMain.on('request_login', (event) => {
-        bot.run();
+    ipcMain.on('qrcode_auth_opened', (event) => {
+        /* bot = new Weixinbot();
+        // 二维码信息获取到了
+        bot.on('qrcode', (qrcodeUrl) => {
+            event.sender.send('weixinbot:qrcode', qrcodeUrl);
+            console.log(qrcodeUrl);
+        });
+
+        bot.on('qrcode_scaned', () => {
+            console.log('二维码已经扫描');
+        });
+
+        bot.on('login_confirmed', () => {
+            console.log('用户已经点击登录');
+        });
+
+        bot.on('friend', (msg) => {
+            console.log(`${msg.Member.NickName}: ${msg.Content}`);
+            bot.sendText(msg.FromUserName, 'Got it');
+        });
+
+        bot.on('logged_out', () => {
+            console.log('用户已经登出');
+        });
+        bot.run(); */
+    });
+
+    ipcMain.on('qrcode_auth_closed', (event) => {
+        bot = null;
     });
 }
 
