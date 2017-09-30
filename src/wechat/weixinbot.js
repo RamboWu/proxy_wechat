@@ -26,9 +26,9 @@ let URLS = getUrls({});
 const logo = fs.readFileSync(path.join(__dirname, '..', 'logo.txt'), 'utf8');
 
 // try persistent cookie
-// const cookiePath = path.join(process.cwd(), '.cookie.json');
-// touch.sync(cookiePath);
-// const jar = new tough.CookieJar(new FileCookieStore(cookiePath));
+const cookiePath = path.join(process.cwd(), '.cookie.json');
+touch.sync(cookiePath);
+const jar = new tough.CookieJar(new FileCookieStore(cookiePath));
 
 const req = axios.create({
     timeout: 35e3,
@@ -38,7 +38,7 @@ const req = axios.create({
       'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2652.0 Safari/537.36',
         'Referer': 'https://wx2.qq.com/',
     },
-    // jar,
+    jar,
     withCredentials: true,
     xsrfCookieName: null,
     xsrfHeaderName: null,
@@ -74,15 +74,14 @@ export default class WeixinBot extends EventEmitter {
     }
 
     async run() {
-        this.init();
-        /* if (fs.existsSync(secretPath)) {
+        if (fs.existsSync(secretPath)) {
             this.initConfig();
             const secret = JSON.parse(fs.readFileSync(secretPath, 'utf8'));
             Object.assign(this, secret);
             this.runLoop();
         } else {
             this.init();
-        } */
+        }
     }
 
     initConfig() {
@@ -356,14 +355,14 @@ export default class WeixinBot extends EventEmitter {
             DeviceID: this.deviceid,
         };
 
-        /* fs.writeFileSync(secretPath, JSON.stringify({
+        fs.writeFileSync(secretPath, JSON.stringify({
             skey: this.skey,
             sid: this.sid,
             uin: this.uin,
             passTicket: this.passTicket,
             baseHost: this.baseHost,
             baseRequest: this.baseRequest,
-        }), 'utf8'); */
+        }), 'utf8');
     }
 
     async webwxinit() {
