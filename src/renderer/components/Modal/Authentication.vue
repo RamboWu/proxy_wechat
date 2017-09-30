@@ -1,6 +1,10 @@
 <template>
   <modal name="authentication-modal" @before-close="beforeClose">
-    <div v-if="loading">
+    <qrcode 
+        :value='qrcode_url'
+        :options="{ size: 170 }">
+    </qrcode>
+    <!--div v-if="loading">
       <div class="loader-inner ball-scale">
         <div></div>
       </div>
@@ -9,18 +13,20 @@
     </div>
     <div v-else>
       <p>This is the modal that is shown when no accounts were added, basically your first start.</p> 
-    </div>
+    </div-->
   </modal>  
 </template>
 
 <script>
-
-// require('../../../libs/jquery.qrcode.min.js');
+// script 代码
+import Qrcode from '@xkeshi/vue-qrcode';
 
 export default {
+    components: { Qrcode },
     name: 'authentication-modal',
     data() {
         return {
+            qrcode_url: '',
             loading: false,
             services: [],
         };

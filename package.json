@@ -36,6 +36,7 @@
     "Web"
   ],
   "dependencies": {
+    "@xkeshi/vue-qrcode": "xkeshi/vue-qrcode",
     "axios": "^0.16.1",
     "bluebird": "^3.5.0",
     "debug": "^3.1.0",
