@@ -20,7 +20,7 @@ export default {
         ]),
         request_login_wechat() {
             // this.$router.push('/main');
-            ipcRenderer.send('request_login');
+            this.$modal.show('authentication-modal');
         },
     },
     created() {

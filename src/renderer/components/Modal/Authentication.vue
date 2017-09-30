@@ -1,5 +1,5 @@
 <template>
-  <modal name="authentication-modal" @before-close="beforeClose">
+  <modal name="authentication-modal" @before-open="start_auth">
     <qrcode 
         :value='qrcode_url'
         :options="{ size: 170 }">
@@ -20,6 +20,7 @@
 <script>
 // script 代码
 import Qrcode from '@xkeshi/vue-qrcode';
+const ipcRenderer = require('electron').ipcRenderer;
 
 export default {
     components: { Qrcode },
@@ -32,6 +33,10 @@ export default {
         };
     },
     methods: {
+        start_auth() {
+            console.log('auth showed!');
+            ipcRenderer.send('request_login');
+        },
         authenticate(identifier) {
             /* this.$electron.ipcRenderer.send('surfbird:authentication:start', { service: identifier });
             this.loading = true; */
@@ -43,6 +48,7 @@ export default {
         },
     },
     created() {
+        console.log('auth created!');
         /* this.$electron.ipcRenderer.send('surfbird:request:services');
 
         this.$electron.ipcRenderer.on('surfbird:get:services', (e, data) => {
