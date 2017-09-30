@@ -1,12 +1,15 @@
 import Vue from 'vue';
+import Electron from 'vue-electron';
+import Modal from 'vue-js-modal';
 import axios from 'axios';
-
 import App from './App';
 // 暂时去掉没用的rounter
 import router from './router';
 import store from './store';
 
-if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
+Vue.use(Electron);
+Vue.use(Modal);
+
 Vue.http = Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 

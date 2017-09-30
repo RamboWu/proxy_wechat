@@ -5,11 +5,12 @@ import Card from './MainPage/card';
 import List from './MainPage/list';
 import TextChat from './MainPage/textchat';
 import Message from './MainPage/message';
+import Modals from './Modals';
 const ipcRenderer = require('electron').ipcRenderer;
 
 export default {
     name: 'main-page',
-    components: { Card, List, TextChat, Message },
+    components: { Card, List, TextChat, Message, Modals },
     methods: {
         ...mapActions([
             'initData',
@@ -40,6 +41,7 @@ export default {
         <message></message>
         <text-chat></text-chat>
     </div>
+    <modals></modals>
 </div>
 </template>
 
